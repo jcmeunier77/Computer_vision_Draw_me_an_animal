@@ -11,11 +11,11 @@ before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - docker build -t jcmeunier77/Computer_vision_draw_me_an_animal:latest .
+  - docker build -t jcmeunier77/computer_vision_draw_me_an_animal:latest .
 
 deploy:
   provider: script
   script:
-    docker push jcmeunier77/Computer_vision_draw_me_an_animal:latest;
+    docker push jcmeunier77/computer_vision_draw_me_an_animal:latest;
   on:
     branch: master
