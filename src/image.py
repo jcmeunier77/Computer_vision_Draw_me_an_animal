@@ -2,7 +2,7 @@ import numpy as np
 from skimage.transform import resize
 
 
-class Image:
+class Image1:
 
     def __init__(self, image: np.array):
         self.image = image
