@@ -47,7 +47,7 @@ st.sidebar.header("See on github")
 
 st.sidebar.markdown("""
 See the code of this project on Github:
-[Draw me an animal repository](https://github.com/jcmeunier77/draw-me-an-animal)
+[Draw me an animal repository](https://github.com/jcmeunier77/Computer_vision_Draw_me_an_animal)
 """)
 
 # Header
