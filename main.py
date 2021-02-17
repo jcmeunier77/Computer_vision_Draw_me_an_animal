@@ -10,45 +10,31 @@ import requests
 import base64
 import textwrap
 
-path_to_img = "./img/animals/"
+# Defining global variables
+path_to_img = "https://jcmeunier77.github.io/Computer_vision_Draw_me_an_animal/img/animals/"
+
 animal_list = ['bear', 'bee', 'bird', 'butterfly', 'camel', 'cat', 'cow', 'crab', 'crocodile', 'dog',
              'dolphin', 'elephant', 'frog', 'giraffe', 'horse', 'kangaroo', 'lion', 'lobster', 'monkey', 'mosquito',
              'mouse', 'octopus', 'owl', 'panda', 'parrot', 'penguin', 'pig', 'rabbit', 'raccoon', 'rhinoceros',
              'scorpion', 'turtle', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'swan', 'tiger', 'whale']
 
-#r = requests.get(path_to_img+animal_list[1]+".png", stream=True)
-#image = Image.open(io.BytesIO(r.content))
-
-def render_svg(svg):
-    """Renders the given svg string."""
-    b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
-    html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
-    st.write(html, unsafe_allow_html=True)
-
-svg = """
-        <svg xmlns="https://github.com/jcmeunier77/Computer_vision_Draw_me_an_animal/blob/master/img/animals/bear.svg" width="10" height="10" </svg>
-    """
+class_list = ['bear', 'bee', 'bird', 'butterfly', 'camel', 'cat', 'cow', 'crab', 'crocodile', 'dog',
+              'dolphin', 'elephant', 'frog', 'giraffe', 'horse', 'kangaroo', 'lion', 'lobster', 'monkey', 'mosquito',
+              'mouse', 'octopus', 'owl', 'panda', 'parrot', 'penguin', 'pig', 'rabbit', 'raccoon', 'rhinoceros',
+              'scorpion', 'turtle', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'swan', 'tiger', 'whale']
 
 st.set_option("deprecation.showfileUploaderEncoding", False)
+
 st.set_page_config(page_title="Draw me an animal", layout="wide")
 
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-
 local_css('assets/style.css')
 
-# Content
-st.title("Draw me an animal...")
-st.markdown("""
-Welcome on this Python app based on a deep CNN model and aimed at 
-recognizing basic - childish - draws on the canvas amongst 35 choices:
-""")
-
 # Sidebar
-
 st.sidebar.header("About the author")
+
 st.sidebar.markdown("""
 **Meunier Jean Christophe**
 Experienced scientist/researcher currently upskilling 
@@ -58,55 +44,47 @@ in the fields of Artificial intelligence (machine learning/deep learning) and Py
 """)
 
 st.sidebar.header("See on github")
+
 st.sidebar.markdown("""
 See the code of this project on Github:
 [Draw me an animal repository](https://github.com/jcmeunier77/draw-me-an-animal)
 """)
 
-cols_rowA = st.beta_columns(12)
-for i in range (0, len(cols_rowA)):
-    with cols_rowA[i]:
-        st.markdown(f'<p style="text-align: center;">{animal_list[i]}</p>', unsafe_allow_html=True)
+# Header
+st.markdown(f'<h1 style="text-align: center;">{"Draw me an animal..."}</h1>', unsafe_allow_html=True)
+
+st.markdown("""
+Welcome on this Python app based on a deep CNN model and aimed at 
+recognizing basic - childish - draws on the canvas amongst 40 choices:
+""")
+
+cols_A = st.beta_columns(14)
+for i in range (0, len(cols_A)):
+    with cols_A[i]:
+        st.markdown(f'<p style="text-align: center;font-size: 13px;">{animal_list[i]}</p>', unsafe_allow_html=True)
         st.image(path_to_img+animal_list[i]+".png", use_column_width=True, unsafe_allow_html=True)
 
-cols_rowB = st.beta_columns(12)
-for i in range (0, len(cols_rowB)):
-    with cols_rowB[i]:
-        st.markdown(f'<p style="text-align: center;">{animal_list[i+12]}</p>', unsafe_allow_html=True)
-        st.image(path_to_img+animal_list[i+12]+".png", use_column_width=True, unsafe_allow_html=True)
+cols_B = st.beta_columns(14)
+for i in range (0, len(cols_B)):
+    with cols_B[i]:
+        st.markdown(f'<p style="text-align: center; font-size: 13px;">{animal_list[i+14]}</p>', unsafe_allow_html=True)
+        st.image(path_to_img+animal_list[i+14]+".png", use_column_width=True, unsafe_allow_html=True)
 
-cols_rowC = st.beta_columns(12)
-for i in range (0, len(cols_rowC)):
-    with cols_rowC[i]:
-        st.markdown(f'<p style="text-align: center;">{animal_list[i+24]}</p>', unsafe_allow_html=True)
-        st.image(path_to_img+animal_list[i+24]+".png", use_column_width=True, unsafe_allow_html=True)
+cols_C = st.beta_columns(14)
+for i in range (0, len(cols_C)):
+    if i <= len(cols_C)-3:
+        with cols_C[i+1]:
+            st.markdown(f'<p style="text-align: center;font-size: 13px;">{animal_list[i+28]}</p>', unsafe_allow_html=True)
+            st.image(path_to_img+animal_list[i+28]+".png", use_column_width=True, unsafe_allow_html=True)
+    else :
+        pass
 
+col_D_empty1, col_D1, col_D_empty2 = st.beta_columns([1,3,1])
 
-
-# with cols1:
-#     st.markdown(f'<p style="text-align: center;">{"Bear"}</p>', unsafe_allow_html=True)
-#     st.image("./img/animals/bear.svg", use_column_width=True, unsafe_allow_html=True)
-
-# st.markdown("Let's create a table!")
-# cols = st.beta_columns(4)
-#
-# for i in range (0, len(cols)):
-#     st.markdown(animal_list[i])
-# for i in range(1, 10):
-#     cols[0].write(f'{i}')
-#     cols[1].write(f'{i * i}')
-#     cols[2].write(f'{i * i * i}')
-#     cols[3].write('x' * i)
-
-# Display a h3 title
-
-
-col8, col9, col10 = st.beta_columns([1,3,1])
-
-with col9:
-    st.markdown(f'<h2 style="text-align: center;">{"Drawing area"}</h2>', unsafe_allow_html=True)
+with col_D1:
+    st.markdown(f'<h2 style="text-align: center;">{"Draw on the canvas"}</h2>', unsafe_allow_html=True)
 #    st.markdown(f'<p style="text-align: center;">{"Draw on the canvas (use slider to change pen size)"}</p>', unsafe_allow_html=True)
-    b_width = st.slider("Draw on the canvas (use the slider to change pen size)", 1, 20, 1)
+    b_width = st.slider("Adjust pen size (for the main features of the sketch, use pen size of 5 or higher)", 1, 20, 1)
 
     # Create a canvas component
     canvas_result = st_canvas(
@@ -120,11 +98,6 @@ with col9:
         key="canvas",
         )
 
-
-
-
-
-
 # Check if the user has written something
 if st.button('Get prediction'):
     model = Model()
@@ -133,26 +106,27 @@ if st.button('Get prediction'):
     image = Image1(canvas_result.image_data)
     # Get the predicted class
     prediction = model.predict(image.get_prediction_ready())
-    class_list = ['bear', 'bee', 'bird', 'butterfly', 'camel', 'cat', 'cow', 'crab', 'crocodile', 'dog',
-                'dolphin', 'elephant', 'frog', 'giraffe', 'horse', 'kangaroo', 'lion', 'lobster', 'monkey', 'mosquito',
-                'mouse', 'octopus', 'owl', 'panda', 'parrot', 'penguin', 'pig', 'rabbit', 'raccoon', 'rhinoceros',
-                'scorpion', 'turtle', 'sheep', 'snail', 'snake', 'spider', 'squirrel', 'swan', 'tiger', 'whale']
 
-    col11, col12 = st.beta_columns(2)
+    col_E_empty1, col_E1, col_E2, col_E_empty = st.beta_columns([1,6,6,1])
 
-    with col11:
+    with col_E1:
         # Display a h2 title
-        st.subheader("What the computer see")
-        st.markdown("""draw resized and gray-scaled""")
+        # st.subheader("What does the computer see")
+        # st.markdown("""draw resized and gray-scaled""")
+
+        st.markdown(f'<h3 style="text-align: center;">{"What does the computer see"}</h3>', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align: center;font-size: 13px;">{"drawing resized and gray-scaled"}</p>', unsafe_allow_html=True)
+
 
         # Display the transformed image
         if image.image is not None:
-            st.image(image.get_streamlit_displayable(), width=290)
+            st.image(image.get_streamlit_displayable(), width=380)
 
     # Display the digit predicted by the model
-    with col12:
-        st.subheader("Recognized draw")
-        st.markdown("The draw recognized by the model")
+    with col_E2:
+        st.markdown(f'<h3 style="text-align: center;">{"Recognized animal"}</h3>', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align: center;font-size: 13px;">{"animal recognized by the model"}</p>', unsafe_allow_html=True)
+
         st.markdown(
             f'<p style="font-size: 44px;'
             f'font-weight: bold;'
@@ -161,26 +135,18 @@ if st.button('Get prediction'):
             f'flex-direction: column;'
             f'justify-content: space-around;'
             f'border: 1px solid #000;'
-            f'width: 290px;'
-            f'height: 290px;">{class_list[prediction]}<img src="./img/animals/bear.svg"></p>',
+            f'width: 380px;'
+            f'height: 380px;">{class_list[prediction]}<img width = "260" src = {path_to_img+class_list[prediction]+".png"} style = "margin - left: 65px;"></p>',
             unsafe_allow_html=True
         )
+    st.markdown("""""")
 
-    # from PIL import Image
-    # >> > image = Image.open('sunrise.jpg')
-    # >> >
-    # >> > st.image(image, caption='Sunrise by the mountains',
-    #               ...
-    # use_column_width = True)
+    chart_data = pd.DataFrame(
+             model.probabilities,
+             columns=[f"{i}" for i in animal_list]
+         )
+    st.markdown(f'<h3 style="text-align: center;">{"Probability distribution"}</h3>', unsafe_allow_html=True)
+    st.markdown(f'<p style="text-align: center;font-size: 13px;">{"Was your digit hard to recognize ?"}</p>',
+                unsafe_allow_html=True)
 
-    #
-    # with col4:
-    #
-    #     chart_data = pd.DataFrame(
-    #         model.probabilities,
-    #         columns=[f"{i}" for i in range(40)]
-    #     )
-    #
-    #     st.subheader("Probability distribution")
-    #     st.markdown("Was your digit hard to recognize ?")
-    #     st.bar_chart(chart_data.T)
+    st.bar_chart(chart_data.T)
