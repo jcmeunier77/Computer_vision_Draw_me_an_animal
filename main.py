@@ -55,7 +55,7 @@ st.markdown(f'<h1 style="text-align: center;">{"Draw me an animal..."}</h1>', un
 
 st.markdown("""
 Welcome on this Python app based on a deep CNN model and aimed at 
-recognizing basic - childish - draws on the canvas amongst 40 choices:
+recognizing basic - childish - drawings on the canvas amongst 40 choices:
 """)
 
 cols_A = st.beta_columns(14)
