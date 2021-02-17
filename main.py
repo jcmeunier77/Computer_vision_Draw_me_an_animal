@@ -84,7 +84,7 @@ col_D_empty1, col_D1, col_D_empty2 = st.beta_columns([1,3,1])
 with col_D1:
     st.markdown(f'<h2 style="text-align: center;">{"Draw on the canvas"}</h2>', unsafe_allow_html=True)
 #    st.markdown(f'<p style="text-align: center;">{"Draw on the canvas (use slider to change pen size)"}</p>', unsafe_allow_html=True)
-    b_width = st.slider("Adjust pen size (for the main features of the sketch, use pen size of 5 or higher)", 1, 20, 1)
+    b_width = st.slider("Adjust pen size (for the main features of the sketch, use pen size of 5 or higher)", 1, 20, 6)
 
     # Create a canvas component
     canvas_result = st_canvas(
